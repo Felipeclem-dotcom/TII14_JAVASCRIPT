@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrada de dados</title>
+</head>
+<body>
+
+        <label for="">Digite seu nome:</label>
+        <input type="text" id="nome">
+        <button onclick="capturar()">Enviar</button>
+
+        <p id="resultado"></p>
+
+
+    <script>
+        function capturar() {
+            let nome = document.getElementById('nome').value;
+            console.log(nome);
+
+            let resultado = document.getElementById('resultado');
+            console.log(resultado);
+
+            resultado.innerText = nome;
+        }
+   </script>
+</body>
+</html>

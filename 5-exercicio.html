@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exercicio</title>
+</head>
+<body>
+    <label for="">Digite em Graus Celsius</label>
+    <input type="text" id="celsius">
+
+    <button onclick="converter()">Converter</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        function converter() {
+            let n1 = parseFloat(document.getElementById("celsius").value);
+
+            let soma = (n1 * 9 / 5) + 32;
+
+            let resultado = document.getElementById("resultado");
+
+            resultado.innerText = soma;
+        }
+    </script>
+</body>
+</html>

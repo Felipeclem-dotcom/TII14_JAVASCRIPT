@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrada de dados</title>
+</head>
+<body>
+
+        <label for="">Primeiro número:</label>
+        <input type="text" id="num1">
+        <br>
+        <label for="">Segundo número:</label>
+        <input type="text" id="num2">
+        <button onclick="soma()">Somar</button>
+
+        <p id="resultado"></p>
+
+
+    <script>
+        function soma() {
+            // let num1 = parseInt(document.getElementById("num1").value);
+            // let num2 = parseInt(document.getElementById("num2").value);
+
+
+            let num1 = parseFloat(document.getElementById("num1").value);
+            let num2 = parseFloat(document.getElementById("num2").value);
+            
+            let soma = num1 + num2;
+
+            console.log(`${num1} + ${num2} = ${soma}`);
+
+            let resultado = document.getElementById("resultado");
+
+            resultado.innerText = soma;
+        }
+   </script>
+</body>
+</html>
