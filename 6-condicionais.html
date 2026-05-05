@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Condicionais</title>
+</head>
+<body>
+    <input type="text" id="nota">
+    <button onclick="media()">Enviar</button>
+
+    <p id="resposta"></p>
+    <script>
+        // let idade = 18;
+        // let cnh = true;
+
+        // if(idade >= 18) {
+            
+        //     if(cnh == true) {
+        //         console.log("Voce pode dirigir");
+        //     } else{
+        //         console.log("Voce é maior de idade, mas não pode dirigir");
+        //     }
+        // } else{
+        //     console.log("Voce não pode dirigir");
+        // }
+
+
+        // function media() {
+        // let nota1 = parseInt(document.getElementById("nota").value);
+
+        // let resultado = document.getElementById("resposta");
+        
+        // if(nota1 >= 7) {
+        //     resposta.innerText = "Aprovado";
+        // } else if(nota1 >= 5) {
+        //     resposta.innerText = "Recuperação"
+        // } else {
+        //     resposta.innerText = "Reprovado";
+        // }
+
+        // }
+
+        // let fruta = "pera";
+
+        // switch(fruta) {
+        //     case "morango":
+        //         console.log("Morango")
+        //         break;
+        //     case "pera":
+        //         console.log("Pera")
+        //         break;
+        //     default:
+        //         console.log("Fruta não encontrada");
+        //         break;
+        // }
+
+        let dia = new Date().getDay();
+
+        switch(dia) {
+            case 0:
+                console.log("Domingo");
+                break;
+            case 1:
+                console.log("Segunda");
+                break;
+            case 2:
+                console.log("Terça");
+                break;
+            case 3:
+                console.log("Quarta");
+                break;
+            case 4:
+                console.log("Quinta");
+                break;
+            case 5:
+                console.log("Sexta");
+                break;
+            case 6:
+                console.log("Sabado");
+                break;
+            default:
+                console.log("ERRO");
+                break;
+        }
+
+    </script>
+</body>
+</html>
