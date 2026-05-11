@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="">Digite 3 números</label><br>
+    <input type="text" id="num1"><br>
+    <input type="text" id="num2"><br>
+    <input type="text" id="num3"><br>
+    <button onclick="nota()">Calcular</button>
+ 
+    <p id="resultado"></p>
+ 
+<script>
+ 
+ 
+    function nota()
+    {
+        let num1 = document.getElementById('num1').value;
+        let num2 = document.getElementById('num2').value;
+        let num3 = document.getElementById('num3').value;
+
+        let resultado = document.getElementById('resultado');
+
+        if(isNaN(num1) || isNaN(num2) || isNaN(num3) ) {
+            resultado.innerText = 'ERRO: Insira apenas números inteiros';
+        } else{
+             const maior = Math.max(num1, num2, num3);
+             const empate = [num1, num2, num3].filter(n => n == maior);
+             
+             if(empate.length > 1) {
+                resultado.innerText =`Empate ${maior}, atingido por ${empate.length} números`;
+             }else{
+                resultado.innerText =`O maior númeo é: ${maior}`;
+             }
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrada de dados</title>
+</head>
+<body>
+ 
+ 
+  <label for="">Digite O valor do produto</label>
+  <input type="text" id="inputValor">
+  <button onclick="btnCalc()">Calcular</button>
+ 
+  <p id="resultado"></p>
+   
+  <script>
+    function btnCalc()
+    {
+ 
+   
+      let valor = document.getElementById('inputValor').value
+        //console.log(valor)
+ 
+        let resultado = document.getElementById('resultado')
+ 
+        if(valor > 200){
+            let desconto = valor * 0.15;
+            let valorFinal = valor - desconto;
+       
+ 
+            resultado.innerText = `
+                valor da compra: ${valor}
+                desconto: ${desconto}
+                valor final: ${valorFinal}
+            `
+        }else{
+            resultado.innerText = "sem desconto"
+        }
+       
+    }
+  </script>
+</body>
+</html>

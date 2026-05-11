@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>att2</title>
+</head>
+<body>
+ 
+    <label for="">Selecine a nota do aluno</label>
+    <input type="text" id="notaAL">
+    <button onclick="nota()">Calcular</button>
+ 
+    <p id="resultado"></p>
+ 
+<script>
+ 
+ 
+    function nota()
+    {
+ 
+   
+        let nota = document.getElementById('notaAL').value
+       
+ 
+ 
+        if (nota == 10) {
+            console.log('Aprovado com excelência');
+            } else if (nota >= 7) {
+            console.log('Aprovado');
+            } else if (nota >= 5) {
+            console.log('Recuperação');
+            } else {
+            console.log('Reprovado');
+        }
+ 
+       let resultado = document.getElementById('resultado')
+       resultado.innerText = nota
+     
+    }
+  </script>
+</body>
+</html>
