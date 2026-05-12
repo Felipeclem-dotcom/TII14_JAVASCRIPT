@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // o que é array
+
+        // Um array é uma estrutura de dados que permite armazenar múliplos valores em única variável. Em JavaScript, arrays são objetos especiais que armazenam elementos de forma indexada, começando do índice 0.
+
+        // const frutas = ['Maça', 'Banana', 'Uva', 'Laranja'];
+        // console.log(frutas[0]);
+
+        // const nomes = new Array('Diego', 'Felipe', 'João', 'Bruno', 'Kauan');
+        // console.log(nomes[1]);
+        
+        // const misto = [1, 'Jhenny', true, {nome: 'Felipe', idade: 17}, [5,4,3,2,1,0]];
+        // console.log(misto[4][1]);
+
+
+        // let matriz = [
+        //     [1, 2, 3],
+        //     [4, 5, [5,4,3,2,1,0]],
+        //     [7, 8, 9],
+        //     ["diego"]
+        // ];
+
+        // console.log(matriz[1][2][1]);
+
+        // let numeros = [2, 6, 9, 5, 6, 26];
+        // // console.log(numeros.length);
+        // var texto = 'Olá, Mundo!';
+        // // console.log(texto[3]);
+        // // console.log(texto.length);
+
+        // for(i = 0; i < texto.length; i++) {
+        //     console.log(texto[i]);
+
+        //     if(texto[i] == '!') {
+        //         console.log('Posicao ' + (i + 1))
+        //     }
+        // }
+
+        //preencher um array
+
+        let lista = [];
+
+        //escolher quantidade de posições do array
+
+        //pedir para o usuario preencher o array
+
+        let quanti = parseInt(prompt("Escolha a quantidade de números: "));
+
+        for (i = 1; i <= quanti; i++) {
+            let info = parseInt(prompt(`Digite a ${i}º informação:`));
+            lista.push(info);
+            
+        }
+
+        for (i = 0; i < quanti; i++) {
+            console.log(lista[i]);
+        }
+        
+    </script>
+</body>
+</html>

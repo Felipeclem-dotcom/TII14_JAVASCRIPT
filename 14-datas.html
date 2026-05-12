@@ -17,16 +17,69 @@
        
     //    console.log(new Date("1991-10-25T08:11:25Z"));
 
-       const DATA = new Date();
-       console.log(DATA.getFullYear());//ano atual
-       console.log(DATA.getMonth());//mes atual
-       console.log(DATA.getDate());//dia do mes
-       console.log(DATA.getDay());//dia da semana (0,1,2,3,4,5,6)
-       console.log(DATA.getHours());//horario atual
-       console.log(DATA.getMinutes());//minuto atual
-       console.log(DATA.getSeconds());//segundo atual
-       console.log(DATA.getMilliseconds());//milisegundo atual
-       console.log(DATA.getTime());//retorna os milesegundos desde primeiro de janeiro de 1970 - "Unix Epoch"
-    </script>
+    //    const DATA = new Date();
+    //    console.log(DATA.getFullYear());//ano atual
+    //    console.log(DATA.getMonth() + 1);//mes atual
+    //    console.log(DATA.getDate());//dia do mes
+    //    console.log(DATA.getDay());//dia da semana (0,1,2,3,4,5,6)
+    //    console.log(DATA.getHours());//horario atual
+    //    console.log(DATA.getMinutes());//minuto atual
+    //    console.log(DATA.getSeconds());//segundo atual
+    //    console.log(DATA.getMilliseconds());//milissegundo atual
+    //    console.log(DATA.getTime());//retorna o timestamp ( milesegundos desde primeiro de janeiro de 1970 - "Unix Epoch")
+
+        //TimeStamp
+        //O timestamp é um número que representa a quantidade de milissegundos desde 1° de janeiro de 1970
+        //(conhecido como "Unix Epoch")
+var timestamp = Date.now(); //retorna o timestamp atual
+        // console.log(timestamp);
+
+        // var data = new Date(timestamp);
+        // console.log(data);
+        // 
+
+        //formatação de data
+        
+        // var dia = data.getDate();
+        // var mes = data.getMonth() + 1;
+        // var ano = data.getFullYear();
+
+        // console.log(`${dia}/${mes}/${ano}`);
+
+        //diferença entre datas
+        //você pode calcular a diferença entre duas datas subtraindo seus timestamp
+
+        // var data1 = new Date(2026, 6, 12);
+        // var data2 = new Date(2026, 6, 15);
+
+        // var diferenca = data2 - data1;
+        // console.log(diferenca);
+        
+        // var dia = diferenca / (1000 * 60 * 60 * 24);
+        // console.log(dia);
+
+        // console.log("------------------------------");
+
+        // let timestampDia = 86400000;
+        // let qtdDia = 5;
+        // let calculo = timestampDia * qtdDia;
+        // let dias = calculo / (1000 * 60 * 60 * 24);
+        // console.log(dias);
+
+        //fusos horários (Times zone)
+
+        let formatador = new Intl.DateTimeFormat(
+            'jp',
+            {
+                timeZone: 'Asia/Tokyo',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+            }
+        );
+        console.log(formatador.format(new Date()));
+        console.log(new Date().toLocaleDateString());
+
+    </script> 
 </body>
 </html>
