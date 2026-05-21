@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM - Aula 3: Modificando Estilos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #ff9800;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #555;
+            margin-top: 30px;
+        }
+        .exemplo {
+            background-color: #f9f9f9;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .resultado {
+            background-color: #fff3e0;
+            border: 1px solid #ff9800;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+        button:hover {
+            background-color: #e68900;
+        }
+        #elemento-estilo {
+            padding: 20px;
+            margin: 10px 0;
+            border: 2px solid #333;
+            background-color: #fff;
+            color: #000;
+            font-size: 16px;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        .info-box {
+            background-color: #e3f2fd;
+            border: 1px solid #2196f3;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .box-exemplo {
+            width: 100px;
+            height: 100px;
+            background-color: #2196f3;
+            margin: 10px 0;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Manipulação de DOM - Aula 3: Modificando Estilos</h1>
+        
+        <p>Nesta aula aprenderemos como modificar os estilos CSS dos elementos usando JavaScript.</p>
+
+        <!-- ============================================ -->
+        <!-- EXEMPLO 1: Propriedade style -->
+        <!-- ============================================ -->
+        <h2>1️⃣ Modificando Estilos - Propriedade style</h2>
+        
+        <div class="exemplo">
+            <p>A propriedade <code>style</code> permite modificar estilos CSS diretamente.</p>
+            <p>Sintaxe: <code>elemento.style.propriedade = "valor"</code></p>
+            <div class="info-box">
+                💡 <strong>Nota:</strong> Propriedades CSS com hífen (como background-color) viram camelCase em JavaScript (backgroundColor)
+            </div>
+        </div>
+
+        <div id="elemento-estilo">Este elemento terá seus estilos modificados</div>
+
+        <button onclick="mudarCor()">Mudar Cor de Fundo</button>
+        <button onclick="mudarFont()">Mudar Tamanho da Fonte</button>
+        <button onclick="mudarBorda()">Mudar Borda</button>
+        <button onclick="restaurou()">Restaurar</button>
+
+        <div class="resultado" id="resultado1"></div>
+
+        <!-- ============================================ -->
+        <!-- EXEMPLO 2: Múltiplos Estilos -->
+        <!-- ============================================ -->
+        <h2>2️⃣ Modificando Múltiplos Estilos</h2>
+        
+        <div class="exemplo">
+            <p>Podemos modificar vários estilos de uma vez.</p>
+        </div>
+
+        <div id="elemento-multiplo" style="padding: 20px; margin: 10px 0; background-color: #e0e0e0;">
+            Elemento com múltiplos estilos
+        </div>
+
+        <button onclick="aplicarMultiplosEstilos()">Aplicar Múltiplos Estilos</button>
+        <button onclick="restaurarMultiplosEstilos()">Restaurar</button>
+
+        <div class="resultado" id="resultado2"></div>
+
+        <!-- ============================================ -->
+        <!-- EXEMPLO 3: Adicionar/Remover Classes -->
+        <!-- ============================================ -->
+        <h2>3️⃣ Adicionando e Removendo Classes</h2>
+        
+        <div class="exemplo">
+            <p>Usar classes CSS é mais eficiente que modificar estilos individuais.</p>
+            <p>Métodos: <code>classList.add()</code>, <code>classList.remove()</code>, <code>classList.toggle()</code></p>
+        </div>
+
+        <style>
+            .destaque {
+                background-color: #ffeb3b !important;
+                color: #000 !important;
+                font-weight: bold;
+                padding: 20px;
+                border-radius: 8px;
+            }
+            .oculto {
+                display: none;
+            }
+            .visivel {
+                display: block;
+            }
+        </style>
+
+        <div id="elemento-classe" style="padding: 20px; margin: 10px 0; background-color: #f0f0f0;">
+            Elemento para adicionar/remover classes
+        </div>
+
+        <button>Adicionar Classe "destaque"</button>
+        <button>Remover Classe "destaque"</button>
+        <button>Alternar Classe "destaque"</button>
+
+        <div class="resultado" id="resultado3"></div>
+
+        <!-- ============================================ -->
+        <!-- EXEMPLO 4: Verificar Classes -->
+        <!-- ============================================ -->
+        <h2>4️⃣ Verificando Classes - classList.contains()</h2>
+        
+        <div class="exemplo">
+            <p>O método <code>classList.contains()</code> verifica se um elemento tem uma classe.</p>
+        </div>
+
+        <button>Verificar se tem Classe "destaque"</button>
+
+        <div class="resultado" id="resultado4"></div>
+
+        <!-- ============================================ -->
+        <!-- EXEMPLO 5: Animações com Estilos -->
+        <!-- ============================================ -->
+        <h2>5️⃣ Criando Animações com Estilos</h2>
+        
+        <div class="exemplo">
+            <p>Podemos criar animações modificando estilos com JavaScript.</p>
+        </div>
+
+        <div class="box-exemplo" id="caixa-animada"></div>
+
+        <button>Animar Caixa</button>
+        <button>Restaurar</button>
+
+        <div class="resultado" id="resultado5"></div>
+
+        <!-- ============================================ -->
+        <!-- RESUMO DOS MÉTODOS -->
+        <!-- ============================================ -->
+        <h2>📊 Resumo dos Métodos</h2>
+        
+        <table border="1" cellpadding="10" style="width: 100%; border-collapse: collapse;">
+            <tr style="background-color: #ff9800; color: white;">
+                <th>Método/Propriedade</th>
+                <th>O que faz</th>
+                <th>Exemplo</th>
+            </tr>
+            <tr>
+                <td><code>element.style.propriedade</code></td>
+                <td>Modifica um estilo CSS</td>
+                <td><code>elemento.style.backgroundColor = "red"</code></td>
+            </tr>
+            <tr>
+                <td><code>classList.add()</code></td>
+                <td>Adiciona uma classe</td>
+                <td><code>elemento.classList.add('destaque')</code></td>
+            </tr>
+            <tr>
+                <td><code>classList.remove()</code></td>
+                <td>Remove uma classe</td>
+                <td><code>elemento.classList.remove('destaque')</code></td>
+            </tr>
+            <tr>
+                <td><code>classList.toggle()</code></td>
+                <td>Alterna uma classe (adiciona se não tem, remove se tem)</td>
+                <td><code>elemento.classList.toggle('destaque')</code></td>
+            </tr>
+            <tr>
+                <td><code>classList.contains()</code></td>
+                <td>Verifica se tem uma classe</td>
+                <td><code>elemento.classList.contains('destaque')</code></td>
+            </tr>
+        </table>
+
+        <!-- ============================================ -->
+        <!-- TABELA DE CONVERSÃO CSS PARA JAVASCRIPT -->
+        <!-- ============================================ -->
+        <h2>📝 Conversão de Propriedades CSS para JavaScript</h2>
+        
+        <table border="1" cellpadding="10" style="width: 100%; border-collapse: collapse;">
+            <tr style="background-color: #ff9800; color: white;">
+                <th>CSS</th>
+                <th>JavaScript</th>
+            </tr>
+            <tr>
+                <td><code>background-color</code></td>
+                <td><code>backgroundColor</code></td>
+            </tr>
+            <tr>
+                <td><code>font-size</code></td>
+                <td><code>fontSize</code></td>
+            </tr>
+            <tr>
+                <td><code>border-radius</code></td>
+                <td><code>borderRadius</code></td>
+            </tr>
+            <tr>
+                <td><code>margin-top</code></td>
+                <td><code>marginTop</code></td>
+            </tr>
+            <tr>
+                <td><code>padding-left</code></td>
+                <td><code>paddingLeft</code></td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        function mudarCor() {
+            const elemento = document.getElementById('elemento-estilo');
+
+            elemento.style.backgroundColor = '#ff6b6b';
+
+            document.getElementById('resultado1').innerHTML = `<strong> ✅ Cor modificada! </strong> <br>
+            BackgroudColor: #ff6b6b`;
+        }
+
+        function mudarFont() {
+            const elemento2 = document.getElementById('elemento-estilo');
+
+            elemento2.style.fontSize = '100px';
+
+            document.getElementById('resultado1').innerHTML = `<strong> ✅ Tamanho da font modificada! </strong> <br>
+            Font-size: 16px`;
+        }
+
+        function mudarBorda() {
+            const elemento2 = document.getElementById('elemento-estilo');
+
+            elemento2.style.border = '2px solid #00FF00';
+
+            document.getElementById('resultado1').innerHTML = `<strong> ✅ Borda modificada! </strong> <br>
+            border: 1px solid #ff9800`;
+        }
+
+        function restaurou() {
+            const elemento2 = document.getElementById('elemento-estilo');
+
+            elemento2.style.border = '2px solid #333'
+            elemento2.style.backgroundColor = '#fff'
+            elemento2.style.fontSize = '16px'
+
+            document.getElementById('resultado1').innerHTML = `<strong> ✅ Restaurado! </strong> <br>
+            restaurado`;
+        }
+
+        function aplicarMultiplosEstilos() {
+            const elemento = document.getElementById('elemento-multiplo');
+
+            elemento.style.backgroundColor = '#4caf50';
+            elemento.style.color = 'white';
+            elemento.style.fontSize = '18px';
+            elemento.style.padding = '18px';
+            elemento.style.borderRadius = '10px';
+            elemento.style.textAling = 'center';
+
+            document.getElementById('resultado2').innerHTML = `<strong> ✅ Multiplos estilos aplicados! </strong> <br>
+            backgroundColor : #4caf5; <br>
+            color:white;
+            fontSize: 18px; <br>
+            padding: 10px; <br>
+            borderRadius: 10px; <br>
+            textAling: center;`
+            ;
+        }
+
+        function restaurarMultiplosEstilos() {
+                const elemento = document.getElementById('elemento-multiplo');
+
+                elemento.removeAttribute('style');
+
+                document.getElementById('resultado2').innerHTML = `
+                <strong>Restaurado!</strong> <br>
+                `;
+            }
+
+    </script>
+
+</body>
+</html>
