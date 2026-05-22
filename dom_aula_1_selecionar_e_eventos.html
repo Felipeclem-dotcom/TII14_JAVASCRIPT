@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM - Aula 1: Selecionando Elementos + Eventos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #555;
+            margin-top: 30px;
+        }
+
+        .exemplo {
+            background-color: #f9f9f9;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .resultado {
+            background-color: #e8f4f8;
+            border: 1px solid #007bff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #elemento-id {
+            color: #d9534f;
+            font-weight: bold;
+        }
+
+        .elemento-classe {
+            color: #5cb85c;
+            font-weight: bold;
+        }
+
+        .elemento-tag {
+            color: #f0ad4e;
+        }
+
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .info-box {
+            background-color: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+
+        .caixa-evento {
+            padding: 20px;
+            margin: 10px 0;
+            background-color: #f0f0f0;
+            border: 2px solid #007bff;
+            border-radius: 4px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🎯 Manipulação de DOM - Aula 1: Selecionando Elementos + Eventos</h1>
+
+        <p>Nesta aula aprenderemos como <strong>selecionar elementos HTML</strong> e <strong>responder a ações do
+                usuário</strong> usando eventos.</p>
+
+        <!-- ============================================ -->
+        <!-- PARTE 1: SELECIONANDO ELEMENTOS -->
+        <!-- ============================================ -->
+        <h2>📍 Parte 1: Selecionando Elementos</h2>
+
+        <!-- ============================================ -->
+        <!-- EXEMPLO 1: getElementById + onclick -->
+        <!-- ============================================ -->
+        <h2>1️⃣ getElementById() + Evento Click</h2>
+
+        <div class="exemplo">
+            <p>O método <code>getElementById()</code> seleciona um elemento pelo seu ID.</p>
+            <p>Depois podemos adicionar um evento <code>onclick</code> para responder quando o usuário clica.</p>
+            <div class="info-box">
+                💡 <strong>Fluxo:</strong> Selecionar → Adicionar Evento → Criar Função
+            </div>
+        </div>
+
+        <!-- Elemento HTML com ID -->
+        <p id="elemento-id">Este é um elemento com ID "elemento-id"</p>
+
+        <button onclick="selecionarPorIdComEvento()">Clique para Selecionar e Responder</button>
+
+        <div class="resultado" id="resultado1"></div>
+
+        <!-- ============================================ -->
+        <!-- EXEMPLO 2: getElementsByClassName + onclick -->
+        <!-- ============================================ -->
+        <h2>2️⃣ getElementsByClassName() + Evento Click</h2>
+
+        <div class="exemplo">
+            <p>O método <code>getElementsByClassName()</code> retorna uma coleção de elementos com a classe
+                especificada.</p>
+            <p>Podemos adicionar eventos a cada elemento da coleção.</p>
+        </div>
+
+        <!-- Elementos HTML com classe -->
+        <p class="elemento-classe">Primeiro elemento com classe "elemento-classe"</p>
+        <p class="elemento-classe">Segundo elemento com classe "elemento-classe"</p>
+        <p class="elemento-classe">Terceiro elemento com classe "elemento-classe"</p>
+
+        <button onclick="selecionarPorClasseComEvento()">Clique para Selecionar Todos</button>
+
+        <div class="resultado" id="resultado2"></div>
+
+        <!-- ============================================ -->
+        <!-- EXEMPLO 3: querySelector + addEventListener -->
+        <!-- ============================================ -->
+        <h2>3️⃣ querySelector() + addEventListener()</h2>
+
+        <div class="exemplo">
+            <p>O método <code>querySelector()</code> usa seletores CSS para selecionar o PRIMEIRO elemento.</p>
+            <p>O método <code>addEventListener()</code> é a forma moderna de adicionar eventos.</p>
+            <div class="info-box">
+                💡 <strong>Vantagem:</strong> Podemos adicionar múltiplos listeners ao mesmo evento!
+            </div>
+        </div>
+
+        <div class="caixa-evento" id="caixa-query">
+            Passe o mouse sobre mim!
+        </div>
+
+        <div class="resultado" id="resultado3"></div>
+
+        <!-- ============================================ -->
+        <!-- EXEMPLO 4: querySelectorAll + Loop + Eventos -->
+        <!-- ============================================ -->
+        <h2>4️⃣ querySelectorAll() + Loop + Eventos</h2>
+
+        <div class="exemplo">
+            <p>O método <code>querySelectorAll()</code> seleciona TODOS os elementos que correspondem.</p>
+            <p>Usamos um <code>for</code> ou <code>forEach</code> para adicionar eventos a cada um.</p>
+        </div>
+
+        <button id="botao-1" class="botao-evento">Botão 1</button>
+        <button id="botao-2" class="botao-evento">Botão 2</button>
+        <button id="botao-3" class="botao-evento">Botão 3</button>
+
+        <div class="resultado" id="resultado4"></div>
+
+        <!-- ============================================ -->
+        <!-- PARTE 2: EVENTOS -->
+        <!-- ============================================ -->
+        <h2>📍 Parte 2: Respondendo a Eventos</h2>
+
+        <!-- ============================================ -->
+        <!-- EXEMPLO 5: Eventos de Mouse -->
+        <!-- ============================================ -->
+        <h2>5️⃣ Eventos de Mouse - mouseover e mouseout</h2>
+
+        <div class="exemplo">
+            <p><code>mouseover</code> - disparado quando o mouse entra no elemento</p>
+            <p><code>mouseout</code> - disparado quando o mouse sai do elemento</p>
+        </div>
+
+        <div class="caixa-evento" id="caixa-mouse">
+            Passe o mouse sobre mim!
+        </div>
+
+        <div class="resultado" id="resultado5"></div>
+
+        <!-- ============================================ -->
+        <!-- EXEMPLO 6: Eventos de Teclado -->
+        <!-- ============================================ -->
+        <h2>6️⃣ Eventos de Teclado - keydown</h2>
+
+        <div class="exemplo">
+            <p><code>keydown</code> - disparado quando uma tecla é pressionada</p>
+        </div>
+
+        <input type="text" id="campo-texto" placeholder="Digite algo aqui...">
+
+        <div class="resultado" id="resultado6"></div>
+
+        <!-- ============================================ -->
+        <!-- EXEMPLO 7: Contador com Eventos -->
+        <!-- ============================================ -->
+        <h2>7️⃣ Projeto Mini: Contador com Eventos</h2>
+
+        <div class="exemplo">
+            <p>Vamos criar um contador que aumenta/diminui quando clicamos nos botões.</p>
+            <p>Usaremos <code>getElementById()</code> para selecionar e <code>onclick</code> para os eventos.</p>
+        </div>
+
+        <div style="text-align: center; padding: 20px; background-color: #f0f0f0; border-radius: 4px; margin: 10px 0;">
+            <div style="font-size: 48px; font-weight: bold; color: #007bff; margin: 20px 0;" id="contador">0</div>
+            <button onclick="aumentarContador()">➕ Aumentar</button>
+            <button onclick="abaixarContador()">➖ Diminuir</button>
+            <button onclick=" resetarValor()">🔄 Resetar</button>
+        </div>
+
+        <div class="resultado" id="resultado7"></div>
+
+        <!-- ============================================ -->
+        <!-- RESUMO -->
+        <!-- ============================================ -->
+        <h2>📊 Resumo: Seleção + Eventos</h2>
+
+        <table border="1" cellpadding="10" style="width: 100%; border-collapse: collapse;">
+            <tr style="background-color: #007bff; color: white;">
+                <th>Seleção</th>
+                <th>Evento</th>
+                <th>Exemplo Completo</th>
+            </tr>
+            <tr>
+                <td><code>getElementById()</code></td>
+                <td><code>onclick</code></td>
+                <td><code>elemento.onclick = function() { ... }</code></td>
+            </tr>
+            <tr>
+                <td><code>getElementsByClassName()</code></td>
+                <td><code>onclick</code></td>
+                <td><code>for(let i=0; i&lt;elementos.length; i++) { elementos[i].onclick = function() { ... } }</code>
+                </td>
+            </tr>
+            <tr>
+                <td><code>querySelector()</code></td>
+                <td><code>addEventListener()</code></td>
+                <td><code>elemento.addEventListener('click', function() { ... })</code></td>
+            </tr>
+            <tr>
+                <td><code>querySelectorAll()</code></td>
+                <td><code>addEventListener()</code></td>
+                <td><code>elementos.forEach(el =&gt; { el.addEventListener('click', function() { ... }) })</code></td>
+            </tr>
+        </table>
+
+        <!-- ============================================ -->
+        <!-- FLUXO COMPLETO -->
+        <!-- ============================================ -->
+        <h2>🔄 Fluxo Completo: Do HTML ao Evento</h2>
+
+        <div class="exemplo">
+            <p><strong>Passo 1:</strong> Criar elemento HTML com ID ou classe</p>
+            <code>&lt;button id="meu-botao"&gt;Clique&lt;/button&gt;</code>
+            <br><br>
+            <p><strong>Passo 2:</strong> Selecionar o elemento em JavaScript</p>
+            <code>const botao = document.getElementById('meu-botao');</code>
+            <br><br>
+            <p><strong>Passo 3:</strong> Adicionar um evento</p>
+            <code>botao.onclick = function() { ... }</code>
+            <br><br>
+            <p><strong>Passo 4:</strong> Criar a função que responde</p>
+            <code>function() { console.log('Botão clicado!'); }</code>
+        </div>
+    </div>
+
+    <!-- JavaScript - funções para Demostração -->
+
+    <script>
+        //FUNCAO 1: getElementByID + onclick
+        // - Variaveis declaradas fora da funções  que te escopo global
+
+        let contadorValor = 0;
+
+        function selecionarPorIdComEvento() {
+            // Passo 1: seleciona o elemento pelo ID, se nao existir o elemento sera null
+
+            const elemento = document.getElementById('elemento-id')
+            // Propriedades úteis do Elemento:
+            // - elemento.id: retorna o valor do atributo id
+            // - elemento.textContent: texto interno do elemento (sem tags HTML)
+            // elemento.tagName: Nome da tag em Maiúsculas (exem: 'P', 'DIV')
+
+            const mensagem = `
+                <strong> ✅ Elemento Selecionado ! </strong><br>
+                <strong> Método:</strong> getElementById()<br>
+                <strong> ID:</strong> ${elemento.id}<br>
+                <strong> Conteúdo: </strong> "${elemento.textContent}<br>
+                <strong>Tag:</strong> ${elemento.tagName}
+            
+            `;
+
+            //innerHTML: define o conteudo HTML dentro do elemento
+
+            document.getElementById('resultado1').innerHTML = mensagem
+        }
+
+        function selecionarPorClasseComEvento() {
+            const elementos = document.getElementsByClassName
+                ('elemento-classe');
+
+            let mensagem = `
+                <strong> ✅ Elemento Selecionado ! </strong><br>
+                <strong>Metudo: </strong> getElementsByClassName
+                <strong> Total encontrado: </strong> ${elementos.length}
+                <br><br>
+            
+            `;
+
+            for (let i = 0; i < elementos.length; i++) {
+                mensagem += ` ${i + 1}. "${elementos[i].textContent}"<br>`
+            }
+
+            document.getElementById('resultado2').innerHTML = mensagem
+        }
+
+        //FUNÇOES 3 e 4 : querySelector, querySelectAll e AddEventListener
+        // - querySelector(selector): retorna o primeiro elemento que corresponde ao seletor css
+        //querySelectorAll(selector): retorna um nodeList (pode usar forEach).
+        //addEventListener(eventos, handler) : adiciona um listener para 
+        // - Diferença entre event handlers:
+        // elemento.onclick = fn -> substitui qualquer handler anterior
+        // elemento.AddEventListener('click',fn) -> empilha handlers sem sobrescrever
+
+
+
+        /*
+            Objetivo do WINDOW
+
+            O "window" é um objeto GLOBAL do navegador. Toda página aberta em
+            um navegador tem um objeto window automatico e unico.
+
+            Porque Usamos "window.addEventListener("Load",..)"?
+            - Load garante que TODOS os elementos HTML já foram carregados
+            no DOM.
+            - Se colocássemos o codigo antes disso, document.getElementById
+            ("elemento-id") retornaria null
+            por que o elemento ainda não existe no DOM.
+            - É essencial quando temos muitos elementos a selecionar!
+        */
+
+        window.addEventListener('load', function () {
+            const caixa = document.getElementById('caixa-query');
+
+            caixa.addEventListener('mouseover', function () {
+                this.style.backgroundColor = '#007bff';
+                this.style.color = 'white';
+
+                document.getElementById('resultado3').innerHTML = `
+                
+                    <strong>✅ Mouse entrou!</strong><br> 
+                    <strong>Método:</strong> querySelector() + 
+                    addEventListener()<br>
+                    <strong>Evento:</strong> mouseover
+                
+                `
+            });
+
+            caixa.addEventListener('mouseout', function () {
+                this.style.backgroundColor = '#f0f0f0';
+                this.style.color = '#000';
+
+                document.getElementById('resultado3').innerHTML = `
+                
+                    <strong>✅ Mouse Saiu!</strong><br> 
+                    <strong>Evento:</strong> mouseout
+                
+                `
+
+            })
+
+        })
+
+        // querySelectorAll + forEach para varios Botões
+        window.addEventListener('load', function () {
+
+            // querySelectorAll retorna um Nodelist, que o forEach em
+            // navegadores modernos.
+            const botoes = document.querySelectorAll('.botao-evento');
+
+            botoes.forEach((botao, indice) => {
+
+                botao.addEventListener('click', function () {
+
+                    document.getElementById('resultado4').innerHTML =
+                        `
+                    <strong>✅ Botão clicado|</strong><br>
+                    <strong>metudo:</strong> querySelectorAll() + ForEach()
+                    <br>
+                    <strong>botao: </strong> ${this.textContent}<br>
+                    <strong>ID: </strong> ${this.id}<br>
+                    <strong>Indice: </strong> ${indice}<br>
+                    
+                    `;
+
+                })
+
+            })
+
+        })
+
+        const caixaMouse = document.getElementById('caixa-mouse');
+
+        caixaMouse.onmouseover = function () {
+            this.style.backgroundColor = '#5cb85c';
+            this.style.color = 'white';
+
+            document.getElementById('resultado5').innerHTML = `
+                <strong>✅ Mouse entrou!</strong><br>
+                <strong>Evento:</strong> mouseover
+            `;
+        };
+
+        caixaMouse.onmouseout = function () {
+            this.style.backgroundColor = '#f0f0f0';
+            this.style.color = '#000';
+
+            document.getElementById('resultado5').innerHTML = `
+                <strong>✅ Mouse saiu!</strong><br>
+                <strong>Evento:</strong> mouseout
+            `;
+        };
+
+        const campoTexto = document.getElementById('campo-texto');
+
+        campoTexto.onkeydown = function (evento) {
+
+            document.getElementById('resultado6').innerHTML = `
+                <strong>✅ Tecla pressionada!</strong><br>
+                <strong>Evento:</strong> keydown<br>
+                <strong>Tecla:</strong> ${evento.key}<br>
+                <strong>Conteúdo digitado:</strong> ${this.value}
+            `;
+        };
+
+        // funcao 7: contador - demostra manipulacao de texto e evetos click
+        // textContent: atualiza somente o texto do elemento
+
+        function aumentarContador(){
+            const display = document.getElementById('contador')
+            contadorValor++;
+            display.textContent = contadorValor;
+            document.getElementById('resultado7').innerHTML =
+            `
+                <strong>✅ contador aumentado!</strong><br>
+                valor atual : ${contadorValor}
+            
+            `;
+
+        }
+
+        function abaixarContador(){
+            const display = document.getElementById('contador')
+            contadorValor--;
+            display.textContent = contadorValor;
+            document.getElementById('resultado7').innerHTML =
+            `
+                <strong>✅ contador Diminuido!</strong><br>
+                valor atual : ${contadorValor}
+            
+            `;
+
+            
+            
+
+        }
+
+        
+
+         function resetarValor(){
+            const display = document.getElementById('contador')
+            contadorValor = 0;
+            display.textContent = contadorValor;
+            document.getElementById('resultado7').innerHTML =
+            `
+                <strong>✅ contador resetado!</strong><br>
+                valor atual : ${contadorValor}
+            
+            `;
+
+         }
+
+
+        
+    </script>
+
+</body>
+
+</html>

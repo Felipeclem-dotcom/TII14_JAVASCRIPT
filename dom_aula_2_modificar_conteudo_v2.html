@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM - Aula 2: Modificando Conteúdo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #28a745;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #555;
+            margin-top: 30px;
+        }
+        .exemplo {
+            background-color: #f9f9f9;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .resultado {
+            background-color: #e8f5e9;
+            border: 1px solid #28a745;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #titulo-original {
+            color: #333;
+            font-size: 18px;
+        }
+        #paragrafo-original {
+            color: #666;
+            font-size: 16px;
+        }
+        #lista-original {
+            color: #555;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        .info-box {
+            background-color: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✏️ Manipulação de DOM - Aula 2: Modificando Conteúdo</h1>
+        
+        <p>Nesta aula aprenderemos como modificar o conteúdo dos elementos HTML usando JavaScript.</p>
+
+        <!-- ============================================ -->
+        <!-- EXEMPLO 1: textContent -->
+        <!-- ============================================ -->
+        <h2>1️⃣ Modificando Texto - textContent</h2>
+        
+        <div class="exemplo">
+            <p>A propriedade <code>textContent</code> modifica apenas o texto do elemento.</p>
+            <p>Não interpreta HTML, apenas texto puro.</p>
+        </div>
+
+        <div id="titulo-original">Este é o título original</div>
+
+        <button onclick="modificarComTextContent()">Modificar com textContent</button>
+        <button onclick="resutarTitulo()">Restaurar</button>
+
+        <div class="resultado" id="resultado1"></div>
+
+        <!-- ============================================ -->
+        <!-- EXEMPLO 2: innerHTML -->
+        <!-- ============================================ -->
+        <h2>2️⃣ Modificando HTML - innerHTML</h2>
+        
+        <div class="exemplo">
+            <p>A propriedade <code>innerHTML</code> modifica o conteúdo HTML do elemento.</p>
+            <p>Interpreta tags HTML e renderiza elementos.</p>
+            <div class="info-box">
+                ⚠️ <strong>Cuidado:</strong> innerHTML pode ser um risco de segurança se usado com dados não confiáveis!
+            </div>
+        </div>
+
+        <div id="paragrafo-original">
+            <p>Este é um parágrafo original</p>
+        </div>
+
+        <button onclick="modificarComInnerHtml()">Modificar com innerHTML</button>
+        <button onclick="restaurarComInnerHtml()">Restaurar</button>
+
+        <div class="resultado" id="resultado2"></div>
+
+        <!-- ============================================ -->
+        <!-- EXEMPLO 3: Adicionar Elementos -->
+        <!-- ============================================ -->
+        <h2>3️⃣ Adicionando Elementos - appendChild()</h2>
+        
+        <div class="exemplo">
+            <p>O método <code>appendChild()</code> adiciona um novo elemento como filho.</p>
+        </div>
+
+        <div id="lista-original">
+            <h3>Lista de Compras:</h3>
+            <ul id="lista">
+                <li>Leite</li>
+                <li>Pão</li>
+            </ul>
+        </div>
+
+        <button onclick="adicionarItemLista()">Adicionar Item à Lista</button>
+        <button onclick="restaurarLista()">Restaurar</button>
+
+        <div class="resultado" id="resultado3"></div>
+
+        <!-- ============================================ -->
+        <!-- EXEMPLO 4: Modificar Atributos -->
+        <!-- ============================================ -->
+        <h2>4️⃣ Modificando Atributos - setAttribute()</h2>
+        
+        <div class="exemplo">
+            <p>O método <code>setAttribute()</code> modifica os atributos de um elemento.</p>
+            <p>Exemplo: src, href, alt, title, etc.</p>
+        </div>
+
+        <img id="imagem-exemplo" src="naruto.jpg" alt="Imagem de exemplo">
+        <br><br>
+
+        <button onclick="modificarAtributoimg()">Mudar Tamanho da Imagem</button>
+        <button onclick="modificarAtributoAlt()">Mudar Texto Alt</button>
+        <button onclick="modificarAtributoRestaurar()">Restaurar</button>
+
+        <div class="resultado" id="resultado4"></div>
+
+        <!-- ============================================ -->
+        <!-- EXEMPLO 5: Obter Atributos -->
+        <!-- ============================================ -->
+        <h2>5️⃣ Obtendo Atributos - getAttribute()</h2>
+        
+        <div class="exemplo">
+            <p>O método <code>getAttribute()</code> obtém o valor de um atributo.</p>
+        </div>
+        
+
+        <button onclick="obterAtributosimg()">Obter Atributos da Imagem</button>
+
+        <div class="resultado" id="resultado5"></div>
+
+        <!-- ============================================ -->
+        <!-- RESUMO DOS MÉTODOS -->
+        <!-- ============================================ -->
+        <h2>📊 Resumo dos Métodos</h2>
+        
+        <table border="1" cellpadding="10" style="width: 100%; border-collapse: collapse;">
+            <tr style="background-color: #28a745; color: white;">
+                <th>Propriedade/Método</th>
+                <th>O que faz</th>
+                <th>Exemplo</th>
+            </tr>
+            <tr>
+                <td><code>textContent</code></td>
+                <td>Modifica apenas texto (sem HTML)</td>
+                <td><code>elemento.textContent = "Novo texto"</code></td>
+            </tr>
+            <tr>
+                <td><code>innerHTML</code></td>
+                <td>Modifica conteúdo HTML completo</td>
+                <td><code>elemento.innerHTML = "&lt;p&gt;Novo&lt;/p&gt;"</code></td>
+            </tr>
+            <tr>
+                <td><code>appendChild()</code></td>
+                <td>Adiciona um elemento filho</td>
+                <td><code>elemento.appendChild(novoElemento)</code></td>
+            </tr>
+            <tr>
+                <td><code>setAttribute()</code></td>
+                <td>Define o valor de um atributo</td>
+                <td><code>elemento.setAttribute('src', 'imagem.jpg')</code></td>
+            </tr>
+            <tr>
+                <td><code>getAttribute()</code></td>
+                <td>Obtém o valor de um atributo</td>
+                <td><code>elemento.getAttribute('src')</code></td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        //Funcao 1 : modificar texto
+
+        function modificarComTextContent(){
+            titulo = document.getElementById('titulo-original')
+
+            titulo.textContent = "titulo Foi modificado";
+            document.getElementById('resultado1').innerHTML =
+            `
+                <strong> ✅modificado </strong><br>
+                novo conteudo: "${titulo.textContent}"
+            
+            `
+        }
+
+         function resutarTitulo(){
+            document.getElementById('titulo-original').textContent = "este e o titulo original"
+            document.getElementById('resultado1').innerHTML = "<strong>↩️ restaurado"
+        }
+
+        function modificarComInnerHtml(){
+            const paragrafo = document.getElementById('paragrafo-original')
+
+            paragrafo.innerHTML = ` <strong> ✅modificado </strong><br>
+                <p>Informatica para internet</p> <br>
+                <p style = "color: #ff1231"> Segundo <em> Paragrafo </em>  </p>
+            `;
+
+            document.getElementById('resultado2').innerHTML =
+            `
+                <strong> ✅ Modificado novo conteudo HTML renderizado a cima"</strong>
+            `
+        }
+
+        function restaurarComInnerHtml(){
+            document.getElementById('paragrafo-original').innerHTML = "este e o paragrafo original"
+            document.getElementById('resultado2').innerHTML = "<strong>↩️ conteudo restaurado com sucesso!!"
+        }
+
+        //funcao 3 : adidcionar item a lista
+
+        function adicionarItemLista(){
+            const lista = document.getElementById('lista');
+            const novoItem = document.createElement('li');
+
+            novoItem.textContent = "queijo";
+
+            lista.appendChild(novoItem);
+
+            document.getElementById('resultado3').innerHTML = `<strong>✅ Item adicionado:!Novo Item "queijo!!!"`
+
+        }
+
+        function restaurarLista(){
+            const lista = document.getElementById('lista')
+            lista.innerHTML =`
+                <li>Leite</li>
+                <li>Pão</li>
+            
+            `
+
+            document.getElementById('resultado3').innerHTML = "<strong> ↩️ Item restaurado!!</strong>"
+        }
+
+        function modificarAtributoimg(){
+            const imagem = document.getElementById('imagem-exemplo')
+            imagem.setAttribute('width', '300')
+            imagem.setAttribute('heigth', '300')
+
+            document.getElementById('resultado4').innerHTML =
+            `
+                <strong> ✅ atributos modificados!!!</strong><br>
+                width: 300px<br>
+                height: 300px<br>
+            
+            `
+
+        }
+
+        function modificarAtributoAlt(){
+            const alt = document.getElementById('imagem-exemplo')
+            alt.setAttribute('alt', 'Novo alt, teste')
+
+            document.getElementById('resultado4').innerHTML =
+            `
+                <strong> ✅ atributos modificados!!!</strong><br>
+                Alt da Imagem agora e Teste123
+            
+            `
+
+        }
+        function modificarAtributoRestaurar(){
+            const imagem = document.getElementById('imagem-exemplo');
+            imagem.setAttribute('alt', 'imagem exemplo');
+            imagem.removeAttribute('width');
+            imagem.removeAttribute('height');
+
+
+            document.getElementById('resultado4').innerHTML =
+            `
+                <strong> ✅ atributos restaurado!!!</strong>
+            
+            `
+
+        }
+
+        function obterAtributosimg(){
+            const imagem = document.getElementById('imagem-exemplo');
+
+            const src = imagem.getAttribute('src');
+            const alt = imagem.getAttribute('alt');
+            const width = imagem.getAttribute('width') || 'nao definido';
+            const heidth = imagem.getAttribute('heidth') || 'nao definido';
+
+            document.getElementById('resultado5').innerHTML =
+            `
+                <strong> ✅ atributos da imagem: </strong><br>
+                src: "${src}"<br>
+                alt: "${alt}"<br>
+                width: "${width}"<br>
+                height: "${height}"<br>
+            
+            `;
+            
+            
+            
+            
+        }
+
+        
+           
+
+    </script>
+
+</body>
+</html>
