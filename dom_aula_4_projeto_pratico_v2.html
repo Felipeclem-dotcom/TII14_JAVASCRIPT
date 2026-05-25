@@ -277,6 +277,7 @@
             console.log("tarefa adicionada", tarefa);
  
             renderizarTarefas()
+            atualizarEstatisticas()
         }
  
         function renderizarTarefas() {
@@ -288,8 +289,8 @@
                 return;
             }
  
-            listaTarefas.className - ' ';
-            listaTarefas.innerHTML = ' ';
+            listaTarefas.className = '';
+            listaTarefas.innerHTML = '';
  
             tarefas.forEach(tarefas=>{
                 const divTarefa = document.createElement('div')
@@ -297,16 +298,15 @@
                 divTarefa.className = 'tarefa';
  
                 if (tarefas.concluida){
-                    div.classList.add('concluida')
- 
+                    divTarefa.classList.add('concluida')
                 }
  
                 const checkbox = document.createElement('input');
                 checkbox.type = 'checkbox';
                 checkbox.className = 'checkbox';
                 checkbox.checked = tarefas.concluida;
-                //checkbox.onchange = () => alterarTarefa(tarefa.id)
- 
+                checkbox.onchange = () => alterarTarefa(tarefas.id)
+                
                 const textoTarefa = document.createElement('span');
                 textoTarefa.className = 'texto-tarefa';
                 textoTarefa.textContent = tarefas.texto;
@@ -314,7 +314,7 @@
                 const botaoDeletar = document.createElement('button')
                 botaoDeletar.className = 'botao-deletar'
                 botaoDeletar.textContent = 'Deletar'
-                botaoDeletar.onclick = () => deletarTarefa(tarefa.id)
+                botaoDeletar.onclick = () => deletarTarefa(tarefas.id)
  
                 divTarefa.appendChild(checkbox)
                 divTarefa.appendChild(textoTarefa)
@@ -326,18 +326,41 @@
         }
  
         function alterarTarefa(id) {
-            const tarefa = tarefa.find(t => t.id === id)
+            const tarefa = tarefas.find(t => t.id === id)
  
             if (tarefa) {
                 tarefa.concluida = !tarefa.concluida;
                 renderizarTarefas()
                 atualizarEstatisticas()
             }
+
+            
+        }
+
+        function deletarTarefa(id) {
+            tarefas = tarefas.filter(t => t.id !== id);
+            
+            renderizarTarefas()
+            atualizarEstatisticas()
         }
  
-       
+       function atualizarEstatisticas() {
+            const totalTarefas = tarefas.length;
+            console.log(totalTarefas)
+
+            const total_tarefas = document.getElementById('total-tarefas');
+            total_tarefas.innerText = (totalTarefas);
+
+
+            const tarefas_concluidas = tarefas.filter(t => t.concluida).length
+
+            const totalConcluido = document.getElementById('tarefas-concluida')
+            
+            totalConcluido.innerText = (totaltarefa);
+            
+       }
  
- 
+
     </script>
 </body>
 </html>
