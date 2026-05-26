@@ -241,10 +241,10 @@
         <!-- BOTÕES DE AÇÃO -->
         <!-- ============================================ -->
         <div class="botoes-acao">
-            <button class="botao-limpar-concluidas">
+            <button class="botao-limpar-concluidas" onclick="limparConcluidas()">
                 Limpar Concluídas
             </button>
-            <button class="botao-limpar">
+            <button class="botao-limpar" onclick="limparTudo()">
                 Limpar Tudo
             </button>
         </div>
@@ -333,8 +333,6 @@
                 renderizarTarefas()
                 atualizarEstatisticas()
             }
-
-            
         }
 
         function deletarTarefa(id) {
@@ -343,24 +341,40 @@
             renderizarTarefas()
             atualizarEstatisticas()
         }
- 
+
        function atualizarEstatisticas() {
             const totalTarefas = tarefas.length;
             console.log(totalTarefas)
 
-            const total_tarefas = document.getElementById('total-tarefas');
-            total_tarefas.innerText = (totalTarefas);
+            document.getElementById('total-tarefas').innerText = (totalTarefas);
 
+            //---------------------------------------------CONCLUIDAS-----------------------------------------------
+            const totalTarefasConcluidas = tarefas.filter(tarefa => tarefa.concluida === true).length;
+            console.log(totalTarefasConcluidas)
 
-            const tarefas_concluidas = tarefas.filter(t => t.concluida).length
+            document.getElementById('tarefas-concluidas').innerText = (totalTarefasConcluidas);
 
-            const totalConcluido = document.getElementById('tarefas-concluida')
-            
-            totalConcluido.innerText = (totaltarefa);
-            
+            //----------------------------------------------PENDENTES-----------------------------------------------
+            const totalTarefasPendentes = tarefas.filter(tarefa => tarefa.concluida === false).length;
+            console.log(totalTarefasPendentes)
+
+            document.getElementById('tarefas-pendentes').innerText = (totalTarefasPendentes);
        }
  
+       function limparConcluidas() {
+        tarefas = tarefas.filter(tarefa => tarefa.concluida === false);
+            
+            
+        renderizarTarefas();
+        atualizarEstatisticas();
+       }
 
+       function limparTudo() {
+        tarefas = [];
+        
+        renderizarTarefas()
+        atualizarEstatisticas()
+       }
     </script>
 </body>
 </html>

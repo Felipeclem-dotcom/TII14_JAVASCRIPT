@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ 
+main{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+ 
+form{
+    width: 50%;
+    margin: 0 auto;
+}
+ 
+input{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+ 
+.erro{
+    color: red;
+    font-size: 14px;
+}
+ 
+button{
+    background-color: green;
+    color: #fff;
+    padding:1px solid green;
+    width: 100%;
+}
+
+button:hover{
+    background: rgba(255, 0, 0, 0.5);
+}
